@@ -1,0 +1,130 @@
+1. install venv
+2. python -m venv venv-name
+3. venv-name\Scripts\activate
+4. pip install django
+
+## Create a project
+1. django-admin startproject project-name
+2. cd project-name
+3. python manage.py runserver
+4. python manage.py startapp app-name
+5. add app-name to settings.py in INSTALLED_APPS
+6. python manage.py migrate
+7. python manage.py createsuperuser
+8. python manage.py runserver
+9. python manage.py makemigrations
+10.  python manage.py migrate
+
+
+# Database model interaction
+# INSERT INTO DB
+a. python manage.py shell
+b. from model_prac.models import Menu
+c. Menu.objects.all()
+# Entry in DB
+d.  m = Menu.objects.create(name = 'Pasta', cusine = 'italian', price = 100)
+# Objects Created
+e. Menu.objects.all()
+
+# UPDATE DB ITEMS
+>>> from model_prac.models import Menu
+>>> Menu.objects.all()
+<QuerySet [<Menu: Pasta italian>, <Menu: taco Mexico>, <Menu: Pasta italian>]>    
+>>>
+>>>
+>>>
+>>> item = Menu.objects.get(pk=3)
+>>> item.name = 'Salad'
+>>> item.cusine = 'Chinese'
+>>> item.price = 12
+>>> item.save()
+>>> Menu.objects.all()
+<QuerySet [<Menu: Pasta italian>, <Menu: taco Mexico>, <Menu: Salad Chinese>]>    
+>>>
+
+# Working with models
+python manage.py makemigrations
+python manage.py migrate
+# show sql querires
+python manage.py sqlmigrate myapp 0001_initial  
+
+# All commands
+makemigrations
+migrate
+sqlmigrate
+showmigrations
+
+# forms
+from.Form
+form.ModelFrom
+
+# admin interface
+python manage.py createsuperuser
+
+# user creation
+>>> from django.contrib.auth.models import User
+>>> User
+<class 'django.contrib.auth.models.User'>
+>>> User.objects.all()
+<QuerySet [<User: fahad>]>
+>>> user = User.objects.create_user('testUSer', 'test@abc.com', 'pass123')  
+>>> user
+<User: testUSer>
+>>> User.objects.all()
+<QuerySet [<User: fahad>, <User: testUSer>]>
+>>> user.is_staff = True
+>>> user.save()
+
+# super user
+python manage.py createsuperuser --username=admin --email=admin@meta.com
+
+# User Permission
+from django.contrib.auth.models import User
+>>> user = User.objects.create_user('mario', 'mario@lemon.com', 'pass123')
+>>> user_name = User.objects.get(username='mario')
+>>> user_name
+<User: mario>
+>>> user_name.has_perm('myapp.Product') 
+False
+>>> user_name_2 = User.objects.get(username='fahad')
+>>> user_name_2.has_perm('myapp.Product')
+True
+>>>
+
+# MySql
+pip3 install mysqlclient
+# tests
+python manage.py tests
+
+pip3 install pipenv
+pipenv shell
+pipenv install
+
+pip3 freeze  > requirements.txt
+
+# API MOCK
+https://mockapi.io/
+http://www.mockaroo.com/
+
+# Request MOCK
+https://httpbin.org/#/
+
+# using pipenv
+cd folder
+pipenv install django
+pipenv shell (start virtual environemt)
+django-admin startproject ProjectName .
+python manage.py startapp AppName
+pipenv install djangorestframework
+or
+pip3 install djangorestframework
+# configure the DRF in Installed Apps form setting
+rest_framework
+
+# debug-tool-var
+pipenv install django-debug-toolbar
+# add to Installed application: debug_toolbar : urls: path('__debug__/',include('debug_toolbar.urls'))
+# and include middle ware
+
+pipenv install bleach
+python -m pip install django-filter
